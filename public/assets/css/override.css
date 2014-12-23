@@ -1,0 +1,33 @@
+.navbar-inner { 
+	background-image: linear-gradient(to top, rgb(250,50,50), rgb(230,0,40));
+	border-radius: 0px;
+	color: white;
+}
+
+.navbar-inner .container ul li a{
+	color: white;
+}
+
+.sidemenu{
+	margin-top: 10px;
+}
+
+.sidemenu li{
+	display: inline;
+}
+
+body{
+	background: url('../../back.png');
+	background-repeat: repeat-all; 
+}
+
+#footer-content{
+	border-top: 3px red solid;
+}
+
+.error {
+	color: red;
+}
+.v_item{
+
+}
