@@ -12,3 +12,7 @@ Setup
 3. adjust db configuration (protected/config/main.php) 
 4. pray.
 
+Login
+==============
+username: admin
+password: admin
