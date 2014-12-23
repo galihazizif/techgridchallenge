@@ -15,4 +15,5 @@ Setup
 Login
 ==============
 username: admin
+
 password: admin
