@@ -9,8 +9,8 @@ $this->breadcrumbs=array(
 	?>
 
 	<div class="span5">
-		<h4><h1>Tuliskan</h1> Kejadian yang terjadi disekitar anda, fenomena alam, fenomena sosial, fenomena orang alay, sesuatu yang ujug-ujug atau opo wae lah.</h4>
-		<a href="<?php echo $this->createUrl('report/create');?>" class="btn btn-primary">Lek ndhang mulai!</a>
+		<h4><h1>Tuliskan</h1> Kejadian yang terjadi disekitar anda, fenomena alam, fenomena sosial, bahkan fenomena alay.</h4>
+		<br><a href="<?php echo $this->createUrl('report/create');?>" class="btn btn-primary">Mulai !</a>
 	</div>
 
 	<div class="well span7 media">

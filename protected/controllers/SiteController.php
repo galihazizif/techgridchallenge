@@ -73,6 +73,29 @@ class SiteController extends Controller
 	}
 
 	/**
+	 * Registrasi Dulu
+	 */
+
+	public function actionRegister(){
+		$model=new User;
+
+		if(isset($_POST['User'])){
+			$model->attributes = $_POST['User'];
+			if($model->validate()){
+				$model->regdate = date('Y-m-d H:i:s');
+				$model->password = sha1($model->password.$model->regdate); //regdate sebagai bumbu penyedap
+				if($model->save(false)){
+					Yii::app()->user->setFlash('info','Account telah dibuat, silahkan melakukan login');
+					$this->redirect($this->createUrl('report/index'));
+					}
+				}
+		}
+
+		$this->render('register',array('model'=>$model));
+	}
+
+
+	/**
 	 * Displays the login page
 	 */
 	public function actionLogin()

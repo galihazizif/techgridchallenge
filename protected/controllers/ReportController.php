@@ -33,7 +33,7 @@ class ReportController extends Controller
 			),
 			array('allow', // allow admin user to perform 'admin' and 'delete' actions
 				'actions'=>array('admin','delete','update'),
-				'users'=>array('admin'),
+				'users'=>array('@'),
 			),
 			array('deny',  // deny all users
 				'users'=>array('*'),
@@ -79,6 +79,8 @@ class ReportController extends Controller
 		if(isset($_POST['Report']))
 		{
 			$model->attributes=$_POST['Report'];
+			$model->belongto = User::model()->find('username = ?',array(Yii::app()->user->id))->id;
+			$model->pengirim = (!Yii::app()->user->isGuest) ? Yii::app()->user->id : $_POST['Report']['pengirim'];
 			$model->dateposted = date('Y-m-d H:i:s');
 			$uploaded = CUploadedFile::getInstanceByName('Report[image]');
 			if($model->save()){
@@ -113,8 +115,18 @@ class ReportController extends Controller
 		if(isset($_POST['Report']))
 		{
 			$model->attributes=$_POST['Report'];
-			if($model->save())
+			$model->belongto = User::model()->find('username = ?',array(Yii::app()->user->id))->id;
+			$model->pengirim = (!Yii::app()->user->isGuest) ? Yii::app()->user->id : $_POST['Report']['pengirim'];
+			$uploaded = CUploadedFile::getInstanceByName('Report[image]');
+			if($model->save()){
+				if($uploaded !== null){
+					$ext = $uploaded->extensionName;
+					$model->image = 'data/'.$model->id.'.'.$ext;
+					$uploaded->saveAs($model->image);
+					$model->save(false);
+				}
 				$this->redirect(array('view','id'=>$model->id));
+			}
 		}
 
 		$this->render('update',array(

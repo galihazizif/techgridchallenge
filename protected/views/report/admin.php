@@ -24,12 +24,12 @@ $('.search-form form').submit(function(){
 
 <h4>Laporan Phenomenon yang tercatat</h4>
 
-
+<?php $id = User::model()->find('username = ?',array(Yii::app()->user->id))->id;?>
 
 <?php $this->widget('zii.widgets.grid.CGridView', array(
 	'htmlOptions'=>array('class'=>''),
 	'id'=>'report-grid',
-	'dataProvider'=>$model->search(),
+	'dataProvider'=>$model->search($id),
 	'filter'=>$model,
 	'filterPosition'=>'footer',
 	'itemsCssClass'=>'table table-bordered table-condensed table-hover sidemenu table-striped',

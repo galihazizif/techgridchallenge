@@ -7,7 +7,7 @@
 // CWebApplication properties can be configured here.
 return array(
 	'basePath'=>dirname(__FILE__).DIRECTORY_SEPARATOR.'..',
-	'name'=>'Laporke phenomenon',
+	'name'=>'Fenomena',
 	'defaultController'=>'report',
 	'theme'=>'classic',
 	'language'=>'id',
@@ -24,12 +24,12 @@ return array(
 	'modules'=>array(
 		// uncomment the following to enable the Gii tool
 		
-		// 'gii'=>array(
-		// 	'class'=>'system.gii.GiiModule',
-		// 	'password'=>'wedhus',
-		// 	// If removed, Gii defaults to localhost only. Edit carefully to taste.
-		// 	'ipFilters'=>array('127.0.0.1','::1'),
-		// ),
+		'gii'=>array(
+			'class'=>'system.gii.GiiModule',
+			'password'=>'wedhus',
+			// If removed, Gii defaults to localhost only. Edit carefully to taste.
+			'ipFilters'=>array('127.0.0.1','::1'),
+		),
 		
 	),
 
@@ -41,14 +41,14 @@ return array(
 		),
 		// uncomment the following to enable URLs in path-format
 		
-		'urlManager'=>array(
-			'urlFormat'=>'path',
-			'rules'=>array(
-				'<controller:\w+>/<id:\d+>'=>'<controller>/view',
-				'<controller:\w+>/<action:\w+>/<id:\d+>'=>'<controller>/<action>',
-				'<controller:\w+>/<action:\w+>'=>'<controller>/<action>',
-			),
-		),
+		// 'urlManager'=>array(
+		// 	'urlFormat'=>'path',
+		// 	'rules'=>array(
+		// 		'<controller:\w+>/<id:\d+>'=>'<controller>/view',
+		// 		'<controller:\w+>/<action:\w+>/<id:\d+>'=>'<controller>/<action>',
+		// 		'<controller:\w+>/<action:\w+>'=>'<controller>/<action>',
+		// 	),
+		// ),
 		
 		// 'db'=>array(
 		// 	'connectionString' => 'sqlite:'.dirname(__FILE__).'/../data/testdrive.db',
@@ -58,8 +58,8 @@ return array(
 		'db'=>array(
 			'connectionString' => 'mysql:host=localhost;dbname=disaster',
 			'emulatePrepare' => true,
-			'username' => 'yourusername', //change with your mysql username please
-			'password' => 'yourpassword', //change with your mysql password please
+			'username' => 'azizy', //change with your mysql username please
+			'password' => 'hujanabu', //change with your mysql password please
 			'charset' => 'utf8',
 		),
 		

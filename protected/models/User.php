@@ -1,28 +1,26 @@
 <?php
 
 /**
- * This is the model class for table "report".
+ * This is the model class for table "user".
  *
- * The followings are the available columns in table 'report':
+ * The followings are the available columns in table 'user':
  * @property integer $id
- * @property string $pengirim
- * @property string $judul
- * @property string $berita
- * @property string $image
- * @property string $lokasi
- * @property string $dateposted
- * @property integer $status
+ * @property string $username
+ * @property string $password
+ * @property string $regdate
  */
-class Report extends CActiveRecord
+class User extends CActiveRecord
 {
 	/**
 	 * @return string the associated database table name
 	 */
 
-	public $verifyCode;
+	public $emailVerify;
+	public $passwordVerify;
+
 	public function tableName()
 	{
-		return 'report';
+		return 'user';
 	}
 
 	/**
@@ -33,19 +31,15 @@ class Report extends CActiveRecord
 		// NOTE: you should only define rules for those attributes that
 		// will receive user inputs.
 		return array(
-			array('pengirim, judul, berita, lokasi, verifyCode', 'required'),
-			array('pengirim','email'),
-			array('image,', 'file', 
-        		'types'=> 'jpg, jpeg, png',
-        		'allowEmpty'=>true,
-        		'maxSize' => (1024 * 400)
-        		), 
-			array('pengirim, lokasi', 'length', 'max'=>50),
-			array('judul, image', 'length', 'max'=>100),
-			array('verifyCode', 'captcha', 'allowEmpty'=>!CCaptcha::checkRequirements()),
+			array('username, password, emailVerify, passwordVerify', 'required'),
+			array('username, password', 'length', 'max'=>50),
+			array('username','email'),
+			array('username','unique'),
+			array('username','compare','compareAttribute'=>'emailVerify'),
+			array('password','compare','compareAttribute'=>'passwordVerify'),
 			// The following rule is used by search().
 			// @todo Please remove those attributes that should not be searched.
-			array('id, pengirim, judul, berita, lokasi, dateposted, status', 'safe', 'on'=>'search'),
+			array('id, username, password, regdate', 'safe', 'on'=>'search'),
 		);
 	}
 
@@ -67,12 +61,11 @@ class Report extends CActiveRecord
 	{
 		return array(
 			'id' => 'ID',
-			'pengirim' => 'Pengirim',
-			'judul' => 'Judul',
-			'berita' => 'Berita',
-			'image' => 'Image',
-			'lokasi' => 'Lokasi',
-			'dateposted' => 'Dateposted',
+			'username' => 'Email',
+			'password' => 'Password',
+			'emailVerify'=>'Konfirmasi Email',
+			'passwordVerify'=>'Konfirmasi Password',
+			'regdate' => 'Regdate',
 		);
 	}
 
@@ -88,21 +81,16 @@ class Report extends CActiveRecord
 	 * @return CActiveDataProvider the data provider that can return the models
 	 * based on the search/filter conditions.
 	 */
-	public function search($id)
+	public function search()
 	{
 		// @todo Please modify the following code to remove attributes that should not be searched.
 
 		$criteria=new CDbCriteria;
 
-		$criteria->addCondition('belongto = '.$id);
 		$criteria->compare('id',$this->id);
-		$criteria->compare('pengirim',$this->pengirim,true);
-		$criteria->compare('judul',$this->judul,true);
-		$criteria->compare('berita',$this->berita,true);
-		$criteria->compare('image',$this->image,true);
-		$criteria->compare('lokasi',$this->lokasi,true);
-		$criteria->compare('dateposted',$this->dateposted,true);
-		$criteria->compare('belongto',$this->belongto);
+		$criteria->compare('username',$this->username,true);
+		$criteria->compare('password',$this->password,true);
+		$criteria->compare('regdate',$this->regdate,true);
 
 		return new CActiveDataProvider($this, array(
 			'criteria'=>$criteria,
@@ -113,7 +101,7 @@ class Report extends CActiveRecord
 	 * Returns the static model of the specified AR class.
 	 * Please note that you should have this exact method in all your CActiveRecord descendants!
 	 * @param string $className active record class name.
-	 * @return Report the static model class
+	 * @return User the static model class
 	 */
 	public static function model($className=__CLASS__)
 	{

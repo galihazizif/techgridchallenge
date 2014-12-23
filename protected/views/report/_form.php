@@ -61,11 +61,13 @@
 		<button type="button" class="btn btn-mini btn-danger" style="display: none" id="openmap-btn" onClick="reloadMap()">Lokasi Kejadian Telah Dipilih. Ulangi?</button>
 	</div>
 
+	<?php if(Yii::app()->user->isGuest): ?>
 	<div class="span9">
 		<?php echo $form->labelEx($model,'pengirim'); ?>
 		<?php echo $form->textField($model,'pengirim',array('size'=>30,'maxlength'=>30,'placeholder'=>'Email anda.')); ?>
 		<?php echo $form->error($model,'pengirim'); ?>
 	</div>
+	<?php endif;?>
 
 	<div class="span9">
 	<?php $this->widget('CCaptcha',array(

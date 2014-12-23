@@ -21,15 +21,11 @@
 					$menu = array(
 						array('label'=>'<i class="icon-home icon-white"></i> Home', 'url'=>array('/report/index')),
 						array('label'=>'<i class="icon-white icon-pencil"></i> Laporkan Sesuatu!', 'url'=>array('/report/create')),
-						array('label'=>'<i class="icon-lock icon-white"></i> Login', 'url'=>array('/site/login'), 'visible'=>Yii::app()->user->isGuest),		
-					);
-
-					$menu2 = array(
+						array('label'=>'<i class="icon-lock icon-white"></i> Login', 'url'=>array('/site/login'), 'visible'=>Yii::app()->user->isGuest),
+						array('label'=>'<i class="icon-lock icon-white"></i> Daftar', 'url'=>array('/site/register'), 'visible'=>Yii::app()->user->isGuest),
 						array('label'=>'<i class="icon-home icon-white"></i> Kelola', 'url'=>array('/report/admin'),'visible'=>!Yii::app()->user->isGuest),
-						array('label'=>'<i class="icon-lock icon-white"></i> Logout', 'url'=>array('/site/logout'), 'visible'=>!Yii::app()->user->isGuest),		
+						array('label'=>'<i class="icon-lock icon-white"></i> Logout', 'url'=>array('/site/logout'), 'visible'=>!Yii::app()->user->isGuest),				
 					);
-
-					$menu = array_merge($menu, $menu2);
 
 					$this->widget('zii.widgets.CMenu',array(
 						'items'=>$menu,
@@ -43,6 +39,12 @@
 	<br><br>
 	<div class="row">
 		<div class="span11 offset1">
+		<?php if(Yii::app()->user->hasFlash('info')):?>
+			<br>
+			<div class="alert alert-warning">
+				<button type="button" class="close" data-dismiss="alert">&times;</button>
+				<?php echo Yii::app()->user->getFlash('info');?></div>
+		<?php endif;?>
 		<?php echo $content; ?>
 		</div>
 	</div>
