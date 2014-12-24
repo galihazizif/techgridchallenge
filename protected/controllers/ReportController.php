@@ -79,7 +79,7 @@ class ReportController extends Controller
 		if(isset($_POST['Report']))
 		{
 			$model->attributes=$_POST['Report'];
-			$model->belongto = User::model()->find('username = ?',array(Yii::app()->user->id))->id;
+			$model->belongto = (!Yii::app()->user->isGuest)? User::model()->find('username = ?',array(Yii::app()->user->id))->id : -1;
 			$model->pengirim = (!Yii::app()->user->isGuest) ? Yii::app()->user->id : $_POST['Report']['pengirim'];
 			$model->dateposted = date('Y-m-d H:i:s');
 			$uploaded = CUploadedFile::getInstanceByName('Report[image]');
@@ -115,7 +115,7 @@ class ReportController extends Controller
 		if(isset($_POST['Report']))
 		{
 			$model->attributes=$_POST['Report'];
-			$model->belongto = User::model()->find('username = ?',array(Yii::app()->user->id))->id;
+			$model->belongto = (!Yii::app()->user->isGuest)? User::model()->find('username = ?',array(Yii::app()->user->id))->id : -1;
 			$model->pengirim = (!Yii::app()->user->isGuest) ? Yii::app()->user->id : $_POST['Report']['pengirim'];
 			$uploaded = CUploadedFile::getInstanceByName('Report[image]');
 			if($model->save()){
